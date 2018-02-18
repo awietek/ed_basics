@@ -4,13 +4,16 @@ Exact Diagonalization Basics
 Basic scripts for diagonalizing simple lattice models and extracting
 physical information.
 
+
 Installation
 -------------
 t.b.a.
 
 How to run
 -------------
-t.b.a
+Check out this `relative link`_.
+
+.. _relative link: exercises/exercises.rst
 
 Developer
 -------------
