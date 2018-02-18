@@ -4,6 +4,7 @@ Basic script for Exact Diagonalization of spin 1/2 Heisenberg model
 with staggered magnetic field
 
 :author: Alexander Wietek
+:email: alexander.wietek@uibk.ac.at
 """
 from __future__ import division, print_function
 import numpy as np
@@ -13,14 +14,14 @@ from scipy import linalg
 from scipy.sparse import linalg
 
 # Parameters for Heisenberg model
-L=12     # length of chain, keep it smaller than ~16, :-)
+L=16     # length of chain, keep it smaller than ~16, :-)
 J=1      # strength of Heisenberg interaction
 hs=0     # strangth of staggered magnetic field
 sz=0     # magnetization, (number of up-spins = L//2 + sz)
 
 # Parameters for diagonalization
 full_diagonalization = False
-n_lowest_eigenvalues = 5
+n_lowest_eigenvalues = 1
 
 # Functions to manipulate states
 def get_site_value(state, site):
@@ -104,16 +105,15 @@ def get_hamiltonian_sparse(L, J, hs, sz):
                 hamiltonian_rows.append(state_index)
                 hamiltonian_cols.append(new_state_index)
                 hamiltonian_data.append(J/2)
-                hamiltonian_rows.append(new_state_index)
-                hamiltonian_cols.append(state_index)
-                hamiltonian_data.append(J/2)
 
+
+    # print("basis states", basis_states)
     return hamiltonian_rows, hamiltonian_cols, hamiltonian_data
     
 rows, cols, data = get_hamiltonian_sparse(L, J, hs, sz)
-hamiltonian = sp.sparse.csr_matrix((data, (rows, cols)))
+hamiltonian = sp.sparse.csr_matrix((data, (rows, cols))).todense()
 
 eigs = sp.sparse.linalg.eigsh(hamiltonian, k=n_lowest_eigenvalues,
                               which='SA', return_eigenvectors=False,
                               maxiter=1000)
-print(eigs)
+print(eigs / L)

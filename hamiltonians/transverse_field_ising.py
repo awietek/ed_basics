@@ -3,6 +3,7 @@
 Basic script for Exact Diagonalization of transverse field Ising model
 
 :author: Alexander Wietek
+:email: alexander.wietek@uibk.ac.at
 """
 from __future__ import division, print_function
 import numpy as np
@@ -59,9 +60,6 @@ def get_hamiltonian_sparse(L, J, hx):
             hamiltonian_cols.append(state)
             hamiltonian_data.append(hx / 2)
 
-            hamiltonian_rows.append(state)
-            hamiltonian_cols.append(new_state)
-            hamiltonian_data.append(hx / 2)
     return hamiltonian_rows, hamiltonian_cols, hamiltonian_data
 
 rows, cols, data = get_hamiltonian_sparse(L, J, hx)

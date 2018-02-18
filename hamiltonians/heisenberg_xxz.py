@@ -4,6 +4,7 @@ Basic script for Exact Diagonalization of spin-1/2 Heisenberg model
 with staggered magnetic field
 
 :author: Alexander Wietek
+:email: alexander.wietek@uibk.ac.at
 """
 from __future__ import division, print_function
 import numpy as np
@@ -14,10 +15,10 @@ from scipy.sparse import linalg
 
 # Parameters for Heisenberg model
 L=12     # length of chain, keep it smaller than ~16, :-)
-J=1      # strength of Heisenberg interaction
-hs=0     # strangth of staggered magnetic field
+J=0      # strength of Heisenberg interaction
+delta=1  # strength of XY anisotropy
 sz=0     # magnetization, (number of up-spins = L//2 + sz)
-k=4      # momentum quantum number
+k=0      # momentum quantum number
          #(in integer units, acutal momentum 2*pi/L*k
 
 # Parameters for diagonalization
@@ -77,7 +78,7 @@ def get_representative(L, state):
 
 
 # Function to create Hamiltonian
-def get_hamiltonian_sparse(L, J, hs, sz, k):
+def get_hamiltonian_sparse(L, J, delta, sz, k):
     # check if sz is valid
     assert((sz <= (L // 2 + L % 2)) and (sz >= -L//2))
 
@@ -132,19 +133,18 @@ def get_hamiltonian_sparse(L, J, hs, sz, k):
                 new_state = state ^ flipmask
                 representative, translation = get_representative(L, new_state)
                 new_state_index = basis_states.index(representative)
-                coeff = (J/2)*(norms[new_state_index]/norms[state_index])*\
-                        np.exp(1j*2*np.pi*k/L)
+                coeff = ((J+delta)/2)*(norms[new_state_index]/\
+                                       norms[state_index])*\
+                                       np.exp(1j*2*np.pi*k/L)
                 hamiltonian_rows.append(state_index)
                 hamiltonian_cols.append(new_state_index)
                 hamiltonian_data.append(coeff)
-                hamiltonian_rows.append(new_state_index)
-                hamiltonian_cols.append(state_index)
-                hamiltonian_data.append(np.conj(coeff))
+
     return hamiltonian_rows, hamiltonian_cols, hamiltonian_data
 
-rows, cols, data = get_hamiltonian_sparse(L, J, hs, sz, k)
+rows, cols, data = get_hamiltonian_sparse(L, J, delta, sz, k)
 hamiltonian = sp.sparse.csr_matrix((data, (rows, cols)))
 eigs = sp.sparse.linalg.eigsh(hamiltonian, k=n_lowest_eigenvalues,
                               which='SA', return_eigenvectors=False,
                               maxiter=1000)
-print(eigs)
+print(eigs/L)
