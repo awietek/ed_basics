@@ -12,12 +12,14 @@ Overview
 This repository contains
 
 - A python package to create Hamiltonian matrices for three types of models
+  
   1. The Transverse Field Ising model on a linear chain,
      no Sz conservation or momentum conservation is used
   2. The Heisenberg spin-1/2 model with staggered magnetic field
      on a linear chain, Sz conservation is used
   3. The Heisenberg XXZ model on a linear chain, Sz conservation and
      momentum conservation are used
+     
   the package can be found in the subfolder hamiltonians
 - A basic implementation of the Lanczos algorithm, creating the T-matrix,
   can be found in the folder algorithms
