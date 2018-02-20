@@ -46,7 +46,7 @@ Please check in advance, whether the scripts `<example_groundstate_energy.py>`
 
 Exercises
 -------------
-The exercises can be found on the manuscript 
+The exercises can be found on the manuscript `exercises.pdf <exercises/exercises.pdf>`
 
 Developer
 -------------
