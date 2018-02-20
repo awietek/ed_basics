@@ -55,8 +55,9 @@ or clone into the git repository using
 		
     $ git clone git@github.com:alexwie/ed_basics.git
 
+
 Please check in advance, whether the scripts example_groundstate_energy.py_
-  and example_lanczos_convergence.py_ are working on your system.
+and example_lanczos_convergence.py_ are working on your system.
 
 Exercises
 -------------
