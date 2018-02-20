@@ -9,35 +9,32 @@ Implementation of basic Lanczos algorithm
 from __future__ import absolute_import, division, print_function
 
 import numpy as np
-import scipy as sp
-from scipy import sparse
 
-def lanczos(matrix, precision=1e-12, max_iterations = 1000):
+def lanczos(matrix, precision=1e-12, max_iterations=1000):
     '''
     Basic Lanczos algorithm without reorthogonalization
-       
+
     Args:
         matrix (scipy.sparse.csr_matrix): Matrix for Lanczos iterations
         precision (float): precision for convergence of minimal eigenvalue
         max_iterations (int): maximum amount of Lanczos steps
-    
+
     Returns:
         (t_eigs, alphas, betas) where:
         t_eigs (numpy.array): final eigenvalues of T-matrix
         alphas (numpy.array): Diagonal elements of the T-matrix
         betas (numpy.array): Off-diagonal elements of the T-Matrix
-    '''   
+    '''
     linear_size = matrix.get_shape()[0]
-    
+
     alphas = []
     betas = [0.]
-    eigenvalues = []
 
     v1 = np.random.rand(linear_size) + 1j*np.random.rand(linear_size)
     v1 /= np.linalg.norm(v1)
     v0 = np.zeros(linear_size, dtype=complex)
     w = np.zeros(linear_size, dtype=complex)
-    
+
     alpha = 0.
     beta = 0.
 
