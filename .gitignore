@@ -1,1 +1,7 @@
 .*~
+*.pyc
+exercises.aux
+exercises.bbl
+exercises.blg
+exercises.log
+exercises.out

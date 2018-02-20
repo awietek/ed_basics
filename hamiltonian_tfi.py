@@ -1,34 +1,44 @@
 # -*- coding: utf-8 -*-
 """
-Basic script for Exact Diagonalization of transverse field Ising model
+Function to create the Hamiltonian of the transverse field Ising model,
+no symmetries implemented
 
 :author: Alexander Wietek
 :email: alexander.wietek@uibk.ac.at
+:year: 2018
 """
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
+
 import numpy as np
 import scipy as sp
 from scipy import sparse
 from scipy import linalg
 from scipy.sparse import linalg
 
-# Parameters for TFI model
-L=12     # length of chain, keep it smaller than ~16, :-)
-J=1      # strength of Ising interaction
-hx=1     # strangth of transverse field
-
-# Parameters for diagonalization
-full_diagonalization = False
-n_lowest_eigenvalues = 5
-
-def get_site_value(state, site):
-    ''' Function to get local value at a given site '''
-    return (state >> site) & 1 
-
-def hilbertspace_dimension(L):
-    return 2**L
-
 def get_hamiltonian_sparse(L, J, hx):
+    '''
+    Creates the Hamiltonian of the Transverse Field Ising model
+    on a linear chain lattice with periodic boundary conditions.
+       
+    Args:
+        L (int): length of chain
+        J (float): coupling constant for Ising term
+        hx (float): coupling constant for transverse field
+    
+    Returns:
+        (hamiltonian_rows, hamiltonian_cols, hamiltonian_data) where:
+        hamiltonian_rows (list of ints): row index of non-zero elements
+        hamiltonian_cols (list of ints): column index of non-zero elements
+        hamiltonian_data (list of floats): value of non-zero elements
+    '''
+    
+    def get_site_value(state, site):
+        ''' Function to get local value at a given site '''
+        return (state >> site) & 1 
+
+    def hilbertspace_dimension(L):
+        return 2**L
+
     # Define chain lattice
     ising_bonds = [(site, (site+1)%L) for site in range(L)]
 
@@ -61,13 +71,3 @@ def get_hamiltonian_sparse(L, J, hx):
             hamiltonian_data.append(hx / 2)
 
     return hamiltonian_rows, hamiltonian_cols, hamiltonian_data
-
-rows, cols, data = get_hamiltonian_sparse(L, J, hx)
-hamiltonian = sp.sparse.csr_matrix((data, (rows, cols)))
-if hilbertspace_dimension(L) <= n_lowest_eigenvalues or full_diagonalization:
-    eigs = sp.linalg.eigh(hamiltonian.todense(), eigvals_only=True)
-else:
-    eigs = sp.sparse.linalg.eigsh(hamiltonian, k=n_lowest_eigenvalues,
-                                  which='SA', return_eigenvectors=False,
-                                  maxiter=1000)
-print(eigs)

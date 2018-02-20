@@ -1,0 +1,227 @@
+\documentclass[]{article}
+
+%These tell TeX which packages to use.
+\usepackage{array,epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsxtra}
+\usepackage{amsthm}
+% \usepackage{mathrsfs}
+\usepackage{color}
+\usepackage{hyperref}
+
+%Here I define some theorem styles and shortcut commands for symbols I use often
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem{thm}{Theorem}
+\newtheorem{cor}{Corollary}
+\newtheorem*{rmk}{Remark}
+\newtheorem{lem}{Lemma}
+\newtheorem*{joke}{Joke}
+\newtheorem{ex}{Example}
+\newtheorem*{soln}{Solution}
+\newtheorem{prop}{Proposition}
+
+\newcommand{\lra}{\longrightarrow}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\surj}{\twoheadrightarrow}
+\newcommand{\graph}{\mathrm{graph}}
+\newcommand{\bb}[1]{\mathbb{#1}}
+\newcommand{\Z}{\bb{Z}}
+\newcommand{\Q}{\bb{Q}}
+\newcommand{\R}{\bb{R}}
+\newcommand{\C}{\bb{C}}
+\newcommand{\N}{\bb{N}}
+\newcommand{\M}{\mathbf{M}}
+\newcommand{\m}{\mathbf{m}}
+\newcommand{\MM}{\mathscr{M}}
+\newcommand{\HH}{\mathscr{H}}
+\newcommand{\Om}{\Omega}
+\newcommand{\Ho}{\in\HH(\Om)}
+\newcommand{\bd}{\partial}
+\newcommand{\del}{\partial}
+\newcommand{\bardel}{\overline\partial}
+\newcommand{\textdf}[1]{\textbf{\textsf{#1}}\index{#1}}
+\newcommand{\img}{\mathrm{img}}
+\newcommand{\ip}[2]{\left\langle{#1},{#2}\right\rangle}
+\newcommand{\inter}[1]{\mathrm{int}{#1}}
+\newcommand{\exter}[1]{\mathrm{ext}{#1}}
+\newcommand{\cl}[1]{\mathrm{cl}{#1}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\vol}{\mathrm{vol}}
+\newcommand{\cnt}{\mathrm{ct}}
+\newcommand{\osc}{\mathrm{osc}}
+\newcommand{\LL}{\mathbf{L}}
+\newcommand{\UU}{\mathbf{U}}
+\newcommand{\support}{\mathrm{support}}
+\newcommand{\AND}{\;\wedge\;}
+\newcommand{\OR}{\;\vee\;}
+\newcommand{\Oset}{\varnothing}
+\newcommand{\st}{\ni}
+\newcommand{\wh}{\widehat}
+
+%Pagination stuff.
+\setlength{\topmargin}{-.3 in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textheight}{9.in}
+\setlength{\textwidth}{6.5in}
+\pagestyle{empty}
+\usepackage{braket}
+\usepackage{natbib}
+\usepackage{bibentry}
+\bibliographystyle{plainnat}
+
+
+
+\begin{document}
+
+\begin{center}
+  {FOR 1807 Winter School 2018 Marburg}\\
+  \textbf{Exact Diagonalization hands-on
+    session}\\ %You should put your name here
+  Exercise sheet%You should write the date here.
+\end{center}
+
+\vspace{0.2 cm}
+
+In the following exercises we will make use of the scripts
+\texttt{hamiltonian\_tfi.py}, \texttt{hamiltonian\_hb\_staggered.py}
+and \texttt{hamiltonian\_hb\_xxz.py}. Internally, spin states are
+encoded in a binary representation, for example
+\begin{equation}
+  \ket{\uparrow\downarrow\uparrow \uparrow} = (1011)_2 = 11.
+\end{equation}
+The three files contain each contain a function
+\texttt{get\_hamiltonian\_sparse} which creates the Hamiltonian matrix
+in a sparse matrix format. The following Hamiltonians are given
+\begin{itemize}
+\item \texttt{hamiltonian\_tfi.py}: The \textit{Transverse Field
+    Ising} model,
+  \begin{equation}
+    H = J\sum\limits_{\langle i , j \rangle} S^z_iS^z_j + h_x \sum\limits_{i}S^x,
+  \end{equation}
+  where $S^z$ and $S^x$ are the spin-1/2 spin operators, on a
+  one-dimensional chain lattice (with periodic boundary conditions).
+  This model does not conserve total $S^z$. Momentum conservation is
+  not implemented.
+\item \texttt{hamiltonian\_hb\_staggered.py}: The \textit{Heisenberg
+    model in a staggered magnetic field} ,
+  \begin{equation}
+    \label{eq:hb_stag}
+    H = J\sum\limits_{\langle i , j \rangle} \mathbf{S}_i\cdot\mathbf{S}_j + h_S \sum\limits_{i}(-1)^iS^z,
+  \end{equation}
+  one-dimensional chain lattice (with periodic boundary conditions).
+  This model does conserve total $S^z$. Momentum conservation is not
+  implemented.
+\item \texttt{hamiltonian\_hb\_xxz.py}: The \textit{Heisenberg model
+    with Ising anisotropy} ,
+  \begin{equation}
+    \label{eq:hb_xxz}
+    H = J\sum\limits_{\langle i , j \rangle} \left[S^z_iS^z_j +
+      (1+\Delta)\left(S^x_iS^x_j + S^y_iS^y_j\right)\right]
+  \end{equation}
+  one-dimensional chain lattice (with periodic boundary conditions).
+  This model does conserve total $S^z$. Momentum conservation is
+  implemented.
+\end{itemize}
+An example how to use these functions for computations can be found in
+the file \texttt{example\_groundstate\_energy.py}
+\newpage
+\subsection*{Exercise 1: Impementing a Hamiltonian, computing static
+  correlations (basic)}
+\begin{enumerate}
+\item Use the script \texttt{hamiltonian\_tfi.py} to compute ground
+  state energies for $J$ and for a range of values $h_x$ from $0$ to
+  $1$.
+\item Alter the script \texttt{hamiltonian\_tfi.py} to create the
+  Hamiltonian of the Heisenberg model in a staggered magnetic field,
+  as given by Eq.~\ref{eq:hb_stag}. Cross check the ground state
+  energy with the script \texttt{hamiltonian\_hb\_staggered.py} for
+  total $S^z=0$.
+\item Compute the ground state spin correlations
+  $\braket{0|S^z_0S^z_r|0}$ and
+  $\braket{0|\mathbf{S}_0\cdot\mathbf{S}_r|0}$ of the Heisenberg model
+  in a staggered magnetic field. Check whether
+  $$\braket{0|\mathbf{S}_0\cdot\mathbf{S}_r|0} = 3\braket{0|S^z_0S^z_r|0}$$
+  for $h_s=0$.
+\end{enumerate}
+
+\subsection*{Exercise 2: Computing dynamical correlations functions}
+In this exercise we compute the ground state Greeen's function,
+\begin{equation}
+  \label{eq:greensfunction}
+  G^{zz}(\mathbf{q}, z) = \braket{0|S^{\dagger}(\mathbf{q}) 
+    \frac{1}{z-H}S(\mathbf{q})|0}, \text{ where } z = \omega+i\eta,
+\end{equation}
+and the corresponding dynamical spin structure factor
+\begin{equation}
+  \label{eq:dynspin}
+  S^{zz}(\mathbf{q}, \omega) = -\frac{1}{\pi}\lim_{\eta \rightarrow 0}\text{Im}
+  G^{zz}(\mathbf{q}, \omega + i\eta),
+\end{equation}
+where
+$$S(\mathbf{q}) = \frac{1}{\sqrt{L}}\sum\limits_{\mathbf{r}} e^{-i\mathbf{q}{\mathbf{r}}}.$$
+We will compute these quantities for the isotropic Heisenberg chain,
+as in Eq.~\ref{eq:hb_stag} with $h_s=0$.  $L$ denotes the length of
+the chain whose discrete momenta are given by
+$\mathbf{q} = 2\pi/L \cdot 0, 2\pi/L \cdot 1, \ldots, 2\pi/L \cdot
+(L-1)$.  The Hamiltonian $H$ can be created using the script
+\texttt{hamiltonian\_hb\_staggered.py}.
+\begin{enumerate}
+\item (basic) Fix a small but finite $\eta$. Compute the Green's
+  function Eq.~\ref{eq:greensfunction} and the dynamical spin
+  structure factor Eq.~\ref{eq:dynspin} by creating a dense matrix $H$
+  of the Hamiltonian and inverting $(z - H)$ numerically for small
+  system sizes.
+\item (advanced) The Green's function can be evaluated without fully
+  inverting the matrix $(z-H)$ using the \textit{continuous fraction
+    expansion},
+  \begin{equation}
+    \label{eq:contfrac}
+    G^{zz}(\mathbf{q}, z) =
+    \frac{\braket{0|S^{\dagger}(\mathbf{q})S(\mathbf{q})|0}}
+    {z - \alpha_0- \frac{\beta_1^2}{z - \alpha_1 - \frac{\beta_2^2}{z-\cdots}}}
+  \end{equation}
+  Here, $\alpha_n$, $\beta_n$ are given by the Lanczos recursion,
+  \begin{align*}
+    \ket{v_{n+1}} &= \beta_{n+1}^{-1}\left[(H-\alpha_n)\ket{v_n} - \beta_n \ket{v_{n-1}}\right] \\
+    \alpha_n &= \braket{v_n|H|v_n} \\
+    \beta_{n+1} &= \parallel(H-\alpha_n)\ket{v_n} - \beta_n \ket{v_{n-1}}\parallel,
+  \end{align*}
+  with starting vector $\ket{v_0} = S(\mathbf{q})\ket{0}$. A basic
+  implementation of the Lanczos recursion creating the coefficients
+  $\alpha_n$ and $\beta_n$ can be found in the file
+  \texttt{algorithm\_lanczos.py}. Compare the results from continuous
+  fraction expansion to the results from full inversion. For details on
+  the continuous fraction expansion see e.g. \cite{koch20118}.
+\end{enumerate}
+
+\subsection*{Exercise 3: Hamiltonian symmetries}
+In this exercise we investigate the Heisenberg XXZ model
+Eq.~\ref{eq:hb_xxz}. This model has a discrete translational symmetry
+$T:\mathbf{S}_i \mapsto \mathbf{S}_{i+1}$. Hence, a symmetrized basis
+with fixed momentum $2\pi\mathbf{k}\L$ can be chosen. The script
+\texttt{hamiltonian\_hb\_xxz.py} creates the Hamiltonian of the
+Heisenberg model with Ising anisotropy in the basis of momentum
+eigenstates. $\mathbf{k}$ can be specified.
+\begin{enumerate}
+\item (basic) Compute the low-lying eigenvalues of the Hamiltonian for
+  each $\mathbf{k} = 0, \ldots, L-1$ and plot the energies as a
+  function of momentum for the isotropic Heisenberg case.  Cross-check
+  the eigenvalues by also computing them in a non-symmetrized basis by
+  using the script \texttt{hamiltonian\_hb\_staggered.py}.
+\item (expert) The model has an additional $C_2$ reflectional
+  symmetry, $P:\mathbf{S}_i \mapsto \mathbf{S}_{L-1-i}$, which has an
+  even and an odd representation. Extend the script
+  \texttt{hamiltonian\_hb\_xxz.py} to also work in a symmetrized basis
+  of both parity and translational symmetry. Compute the eigenvalues
+  of the Hamiltonian in this new symmetrized basis and compare them
+  with the eigenvalues without parity symmetry. For details on the
+  implementation of discrete symmetries see e.g. \cite{weise}.
+\end{enumerate}
+\bibliography{exercises}
+\end{document}
+
+
