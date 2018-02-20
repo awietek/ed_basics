@@ -18,7 +18,7 @@ This repository contains
      no Sz conservation or momentum conservation is used,
      hamiltonian_tfi.py_.
 
-.. _hamiltonian_tfi.py: <hamiltonian_tfi.py>
+.. _hamiltonian_tfi.py: hamiltonian_tfi.py
 
   2. The Heisenberg spin-1/2 model with staggered magnetic field
      on a linear chain, Sz conservation is used,
