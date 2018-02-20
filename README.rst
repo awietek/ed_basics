@@ -1,5 +1,7 @@
 Exact Diagonalization Basics
 =============================
+.. image:: https://img.shields.io/badge/Python-2.7-brightgreen.svg?style=for-the-badge
+.. image:: https://img.shields.io/badge/requires-NumPy%2C%20SciPy-blue.svg?style=for-the-badge
 
 Tutorial for the FOR1807  Winter School 2018 in Marburg on
 basic techniques in Exact Diagonalization. Basic codes are provided
