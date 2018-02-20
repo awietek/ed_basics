@@ -49,9 +49,16 @@ or clone into the git repository using
 
 
 Please *check in advance*, whether the scripts example_groundstate_energy.py_
-and example_lanczos_convergence.py_ are working on your system. The numpy
-and scipy libraries are required. Please check, whether you can update
-them to the latest version. If you are having any problems please contact me.
+and example_lanczos_convergence.py_ are working on your system:
+
+.. code-block:: bash
+		
+    $ python example_groundstate_energy.py
+    $ python example_lanczos_convergence.py
+    
+The numpy and scipy libraries are required. Please check, whether
+you can update them to the latest version. If you are having any
+problems please contact me.
 
 Exercises
 -------------
