@@ -10,9 +10,9 @@ that ought to be extended, as explained in the exercise sheet.
 
 Overview
 -------------
-This repository contains
+This repository contains:
 
-- Three files to create Hamiltonian matrices for three types of models
+- Three files to create Hamiltonian matrices for three types of models:
   
   1. The Transverse Field Ising model on a linear chain,
      no Sz conservation or momentum conservation is used,
@@ -22,18 +22,29 @@ This repository contains
 
   2. The Heisenberg spin-1/2 model with staggered magnetic field
      on a linear chain, Sz conservation is used,
-     `<hamiltonian_hb_staggered.py>`
+     hamiltonian_hb_staggered.py_.
+
+.. _hamiltonian_hb_staggered.py: hamiltonian_hb_staggered.py
+
   3. The Heisenberg XXZ model on a linear chain, Sz conservation and
-     momentum conservation are used,
-     `<hamiltonian_hb_xxz.py>`
-     
+     momentum conservation are used, hamiltonian_hb_xxz.py_.
+
+.. _hamiltonian_hb_xxz.py: hamiltonian_hb_xxz.py
+
 - A basic implementation of the Lanczos algorithm, creating the T-matrix,
-  `<algorithm_lanczos.py>`
+  algorithm_lanczos.py_.
+
+.. _algorithm_lanczos.py: algorithm_lanczos.py
   
-- example scripts using the above functions `<example_groundstate_energy.py>`
-  and `<example_lanczos_convergence.py>`
-  
-- A set of exercises to be worked on during the hands-on session, `<exercises/exercises.pdf>`
+- example scripts using the above functions example_groundstate_energy.py_
+  and example_lanczos_convergence.py_.
+
+.. _example_groundstate_energy.py: example_groundstate_energy.py
+.. _example_lanczos_convergence.py: example_lanczos_convergence.py
+
+- A set of exercises to be worked on during the hands-on session, exercises.pdf_.
+
+.. _exercises.pdf: exercises/exercises.pdf
 
 Installation
 -------------
@@ -44,12 +55,12 @@ or clone into the git repository using
 		
     $ git clone git@github.com:alexwie/ed_basics.git
 
-Please check in advance, whether the scripts `<example_groundstate_energy.py>`
-  and `<example_lanczos_convergence.py>` are working on your system.
+Please check in advance, whether the scripts example_groundstate_energy.py_
+  and example_lanczos_convergence.py_ are working on your system.
 
 Exercises
 -------------
-The exercises can be found on the manuscript `<exercises/exercises.pdf>_`
+The exercises can be found on the manuscript exercises.pdf_.
 
 Developer
 -------------
