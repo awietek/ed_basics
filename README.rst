@@ -16,7 +16,10 @@ This repository contains
   
   1. The Transverse Field Ising model on a linear chain,
      no Sz conservation or momentum conservation is used,
-     `<hamiltonian_tfi.py>`
+     hamiltonian_tfi.py_.
+
+.. _hamiltonian_tfi.py: <hamiltonian_tfi.py>
+
   2. The Heisenberg spin-1/2 model with staggered magnetic field
      on a linear chain, Sz conservation is used,
      `<hamiltonian_hb_staggered.py>`
@@ -46,7 +49,7 @@ Please check in advance, whether the scripts `<example_groundstate_energy.py>`
 
 Exercises
 -------------
-The exercises can be found on the manuscript `exercises.pdf <exercises/exercises.pdf>`
+The exercises can be found on the manuscript `<exercises/exercises.pdf>_`
 
 Developer
 -------------
