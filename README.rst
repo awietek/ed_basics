@@ -7,6 +7,13 @@ that ought to be extended, as explained in the exercise sheet.
 
 :author: Alexander Wietek
 :license: GNU GPLv3
+.. _hamiltonian_tfi.py: hamiltonian_tfi.py
+.. _hamiltonian_hb_staggered.py: hamiltonian_hb_staggered.py
+.. _hamiltonian_hb_xxz.py: hamiltonian_hb_xxz.py
+.. _algorithm_lanczos.py: algorithm_lanczos.py
+.. _example_groundstate_energy.py: example_groundstate_energy.py
+.. _example_lanczos_convergence.py: example_lanczos_convergence.py
+.. _exercises.pdf: exercises/exercises.pdf
 
 Overview
 -------------
@@ -17,34 +24,19 @@ This repository contains:
   1. The Transverse Field Ising model on a linear chain,
      no Sz conservation or momentum conservation is used,
      hamiltonian_tfi.py_.
-
-.. _hamiltonian_tfi.py: hamiltonian_tfi.py
-
   2. The Heisenberg spin-1/2 model with staggered magnetic field
      on a linear chain, Sz conservation is used,
      hamiltonian_hb_staggered.py_.
-
-.. _hamiltonian_hb_staggered.py: hamiltonian_hb_staggered.py
-
   3. The Heisenberg XXZ model on a linear chain, Sz conservation and
      momentum conservation are used, hamiltonian_hb_xxz.py_.
 
-.. _hamiltonian_hb_xxz.py: hamiltonian_hb_xxz.py
-
 - A basic implementation of the Lanczos algorithm, creating the T-matrix,
   algorithm_lanczos.py_.
-
-.. _algorithm_lanczos.py: algorithm_lanczos.py
   
 - example scripts using the above functions example_groundstate_energy.py_
   and example_lanczos_convergence.py_.
 
-.. _example_groundstate_energy.py: example_groundstate_energy.py
-.. _example_lanczos_convergence.py: example_lanczos_convergence.py
-
 - A set of exercises to be worked on during the hands-on session, exercises.pdf_.
-
-.. _exercises.pdf: exercises/exercises.pdf
 
 Installation
 -------------
@@ -56,8 +48,9 @@ or clone into the git repository using
     $ git clone git@github.com:alexwie/ed_basics.git
 
 
-Please check in advance, whether the scripts example_groundstate_energy.py_
-and example_lanczos_convergence.py_ are working on your system.
+Please *check in advance*, whether the scripts example_groundstate_energy.py_
+and example_lanczos_convergence.py_ are working on your system. If you
+are having any problems please contact me.
 
 Exercises
 -------------
