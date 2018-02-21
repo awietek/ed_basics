@@ -38,7 +38,8 @@ This repository contains:
 - example scripts using the above functions example_groundstate_energy.py_
   and example_lanczos_convergence.py_.
 
-- A set of exercises to be worked on during the hands-on session, exercises.pdf_.
+- A set of exercises to be worked on during the hands-on session will be
+  uploaded on friday.
 
 Installation
 -------------
@@ -64,7 +65,7 @@ problems please contact me.
 
 Exercises
 -------------
-The exercises can be found in the manuscript exercises.pdf_.
+The exercises will be uploaded on friday.
 
 Developer
 -------------

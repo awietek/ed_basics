@@ -92,3 +92,5 @@ else:
                                   maxiter=1000)
 print("Ground state energy of Heisenberg model with staggered field at J =",
       J, ", delta =", delta, ", Sz =", sz, ", k = ", k, ":",  min(eigs))
+
+print("Run successful")
