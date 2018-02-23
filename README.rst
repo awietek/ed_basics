@@ -38,8 +38,8 @@ This repository contains:
 - example scripts using the above functions example_groundstate_energy.py_
   and example_lanczos_convergence.py_.
 
-- A set of exercises to be worked on during the hands-on session will be
-  uploaded on friday.
+- A set of exercises to be worked on during the hands-on session can be
+  found in the file exercises.pdf_.
 
 Installation
 -------------
@@ -48,7 +48,7 @@ or clone into the git repository using
 
 .. code-block:: bash
 		
-    $ git clone git@github.com:alexwie/ed_basics.git
+    $ git clone https://github.com/alexwie/ed_basics.git
 
 
 Please *check in advance*, whether the scripts example_groundstate_energy.py_
@@ -65,7 +65,7 @@ problems please contact me.
 
 Exercises
 -------------
-The exercises will be uploaded on friday.
+The exercises can be found in the file exercises.pdf_.
 
 Developer
 -------------
