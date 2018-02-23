@@ -1,29 +1,24 @@
 # -*- coding: utf-8 -*-
-"""
-Function to create the Hamiltonian of the transverse field Ising model,
-no symmetries implemented
+'''
+Solution to Exercise 1a
 
 :author: Alexander Wietek
 :email: alexander.wietek@uibk.ac.at
 :year: 2018
-"""
+'''
 from __future__ import absolute_import, division, print_function
 
+import numpy as np
+import scipy as sp
+from scipy import sparse
+from scipy import linalg
+from scipy.sparse import linalg
+import matplotlib.pyplot as plt
+
+# Step 1: just copied this function from hamiltonian_tfi.py
 def get_hamiltonian_sparse(L, J, hx):
     '''
     Creates the Hamiltonian of the Transverse Field Ising model
-    on a linear chain lattice with periodic boundary conditions.
-
-    Args:
-        L (int): length of chain
-        J (float): coupling constant for Ising term
-        hx (float): coupling constant for transverse field
-
-    Returns:
-        (hamiltonian_rows, hamiltonian_cols, hamiltonian_data) where:
-        hamiltonian_rows (list of ints): row index of non-zero elements
-        hamiltonian_cols (list of ints): column index of non-zero elements
-        hamiltonian_data (list of floats): value of non-zero elements
     '''
 
     def get_site_value(state, site):
@@ -66,3 +61,23 @@ def get_hamiltonian_sparse(L, J, hx):
             hamiltonian_data.append(hx)
 
     return hamiltonian_rows, hamiltonian_cols, hamiltonian_data
+
+
+# Step 2: Compute the energies of the lowest 10 eigenvalues for x=0...2
+# and plot results
+L=12
+J=1
+n_lowest_eigenvalues = 10
+for hx in np.linspace(0,2,20):
+    rows, cols, data = get_hamiltonian_sparse(L, J, hx)
+    hamiltonian = sp.sparse.csr_matrix((data, (rows, cols)))
+    eigs = sp.sparse.linalg.eigsh(hamiltonian, k=n_lowest_eigenvalues,
+                                  which='SA', return_eigenvectors=False,
+                                  maxiter=1000)
+    plt.plot(hx*np.ones_like(eigs), eigs-min(eigs), 's', color="steelblue")
+    print(hx, eigs)
+plt.xlabel(r"$h_x$")
+plt.ylabel(r"$E - E_0$")
+plt.ylim(-0.1, 6)
+plt.legend()
+plt.show()

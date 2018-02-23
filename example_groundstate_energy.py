@@ -75,7 +75,7 @@ print("Ground state energy of Heisenberg model with staggered field at J =",
 Computation of the ground state energy of the Heisenberg XXZ model
 '''
 # Parameters for Heisenberg model
-L=12       # length of chain, keep it smaller than ~16, :-)
+L=16       # length of chain, keep it smaller than ~16, :-)
 J=1        # strength of Heisenberg interaction
 delta=0    # strength of XY anisotropy
 sz=0       # magnetization, (number of up-spins = L//2 + sz)
